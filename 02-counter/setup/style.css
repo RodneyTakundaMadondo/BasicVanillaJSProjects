@@ -1,0 +1,47 @@
+:root{
+    --fc-primary:#102A42;
+    
+    --ff-primary:"Roboto", sans-serif;
+}
+*,::before,::after{
+  
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    font-family:var(--ff-primary);
+    color: var(--fc-primary);
+}
+.container{
+    width: 50%;
+    max-width: 700px;
+    margin:50vh auto;
+    text-align: center;
+}
+.main__heading{
+    font-size: 5rem;
+    font-weight: 400;
+}
+.value{
+    font-size: 4rem;
+    color: var(--fc-primary);
+    font-weight: 700;
+}
+.btn_container{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    gap:2rem;
+}
+.btn{
+    font-size: 1.5rem;
+    padding: .5rem;
+    background:none;
+    border:none;
+    border:2px solid var(--fc-primary);
+    transition: 0.3 ease-in-out;
+    color: var(--fc-primary);
+}
+.btn:hover{
+    background-color: aliceblue;
+}
