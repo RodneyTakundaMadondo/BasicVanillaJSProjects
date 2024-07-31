@@ -72,63 +72,30 @@ const menu = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
 ];
+//first we have to fetch data from array and dynamically add it to
+
 const sectionCenter = document.querySelector(".section-center");
-const container = document.querySelector(".btn-container");
 
-
-
-window.addEventListener("DOMContentLoaded",()=>{
-  displayMenuItems(menu);
-  displayMenuButtons();
+window.addEventListener("DOMContentLoaded", ()=>{
+ 
+  sectionCenter.innerHTML =  displayMenuItems();
 })
-
-
-function displayMenuItems(array){
-  let menuItems = array.map((item)=>{
-    return ` <article class="menu-item">
-    <img src="${item.img}" alt="menu item" class="photo" />
-    <div class="item-info">
-      <header>
-        <h4>${item.title}</h4>
-        <h4 class="price">$${item.price}</h4>
-      </header>
-      <p class="item-text">
-        ${item.desc}
-      </p>
-    </div>
-  </article>`
-   }).join("");
-   sectionCenter.innerHTML = menuItems;
-}
-
-function displayMenuButtons(){
-  const categories = menu.reduce(function(values,items){//values is referencing the second parameter of reduce method
-    if(!values.includes(items.category)){
-      values.push(items.category);
-    }
-      return values;
-   
-  },["all"]);
-const categoryBtns = categories.map(function(category){
-    return `<button type="button" class="filter-btn" data-id="${category}">
-    ${category}
-  </button>`
-}).join("");
-container.innerHTML = categoryBtns;
-const filterBtns = document.querySelectorAll(".filter-btn");
-filterBtns.forEach((btn)=>{
-  btn.addEventListener("click",function(e){
-    const category =e.currentTarget.dataset.id ;
-    const categoryItems = menu.filter(function(items){
-      if(items.category ===category){
-        return items;
-      }
-    })
-    if(category ==="all"){
-      displayMenuItems(menu)
-    }else{
-      displayMenuItems(categoryItems)
-    }
-  });
-});
+function displayMenuItems(){
+  let menuItems = menu.map((item)=>{
+    return  `
+     <article class="menu-item">
+          <img src="${item.img}" alt="menu item" class="photo" />
+          <div class="item-info">
+            <header>
+              <h4>${item.title}</h4>
+              <h4 class="price">$${item.price}</h4>
+            </header>
+            <p class="item-text">
+              ${item.desc}
+            </p>
+          </div>
+        </article>
+    `
+  }).join("")
+  return menuItems;
 }
