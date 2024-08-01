@@ -75,16 +75,37 @@ const menu = [
 //first we have to fetch data from array and dynamically add it to
 
 const sectionCenter = document.querySelector(".section-center");
-
+let filterBtns = document.querySelectorAll(".filter-btn");
 window.addEventListener("DOMContentLoaded", ()=>{
+  displayMenuItems(menu);
+
  
-  sectionCenter.innerHTML =  displayMenuItems();
 })
-function displayMenuItems(){
-  let menuItems = menu.map((item)=>{
+
+filterBtns.forEach((btn)=>{
+    btn.addEventListener("click",(e)=>{
+        const category =e.currentTarget.dataset.id;
+        const menuCategory = menu.filter((menuItem)=>{
+         if(menuItem.category === category){
+          return menuItem
+         }
+        })
+        if(category === "all"){
+          displayMenuItems(menu);
+        }
+        else{
+          displayMenuItems(menuCategory)
+        }
+    })
+})
+
+
+
+function displayMenuItems(menuItems){
+  let displayMenu = menuItems.map((item)=>{
     return  `
      <article class="menu-item">
-          <img src="${item.img}" alt="menu item" class="photo" />
+          <img src="${item.img}" alt="menu item" class="photo"/>
           <div class="item-info">
             <header>
               <h4>${item.title}</h4>
@@ -97,5 +118,5 @@ function displayMenuItems(){
         </article>
     `
   }).join("")
-  return menuItems;
+  sectionCenter.innerHTML = displayMenu;
 }
