@@ -78,26 +78,27 @@ const sectionCenter = document.querySelector(".section-center");
 let filterBtns = document.querySelectorAll(".filter-btn");
 window.addEventListener("DOMContentLoaded", ()=>{
   displayMenuItems(menu);
-
+  const categories = menu.reduce(()=>{
+    
+  },['all'])
  
 })
+filterBtns.forEach((btn)=>[
+  btn.addEventListener('click',(e)=>{
+    let category = e.currentTarget.dataset.id
 
-filterBtns.forEach((btn)=>{
-    btn.addEventListener("click",(e)=>{
-        const category =e.currentTarget.dataset.id;
-        const menuCategory = menu.filter((menuItem)=>{
-         if(menuItem.category === category){
-          return menuItem
-         }
-        })
-        if(category === "all"){
-          displayMenuItems(menu);
-        }
-        else{
-          displayMenuItems(menuCategory)
+    let menuCategory = menu.filter((menuItem)=>{
+        if(menuItem.category ===category){
+          return menuItem;
         }
     })
-})
+    if(category === "all"){
+      displayMenuItems(menu);
+    }else{
+      displayMenuItems(filteredArray)
+    }
+  })
+])
 
 
 
