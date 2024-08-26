@@ -75,30 +75,45 @@ const menu = [
 //first we have to fetch data from array and dynamically add it to
 
 const sectionCenter = document.querySelector(".section-center");
-let filterBtns = document.querySelectorAll(".filter-btn");
+let btnContainer = document.querySelector(".btn-container");
+
 window.addEventListener("DOMContentLoaded", ()=>{
   displayMenuItems(menu);
-  const categories = menu.reduce(()=>{
-    
-  },['all'])
- 
-})
-filterBtns.forEach((btn)=>[
-  btn.addEventListener('click',(e)=>{
-    let category = e.currentTarget.dataset.id
 
-    let menuCategory = menu.filter((menuItem)=>{
-        if(menuItem.category ===category){
-          return menuItem;
-        }
-    })
-    if(category === "all"){
-      displayMenuItems(menu);
-    }else{
-      displayMenuItems(filteredArray)
+  const categories = menu.reduce((values, items)=>{
+    if(!values.includes(items.category)){
+      values.push(items.category);
     }
+    return values
+  },['all'])
+
+  const categoryBtns = categories.map((category)=>{
+      return `
+        <button type="button" class="filter-btn" data-id=${category}>
+          ${category}
+        </button>
+      `
+  }).join("");
+  btnContainer.innerHTML = categoryBtns;
+  let filterBtns = document.querySelectorAll(".filter-btn");
+  filterBtns.forEach((btn)=>{
+    btn.addEventListener('click',(e)=>{
+      let category = e.currentTarget.dataset.id
+  
+      let menuCategory = menu.filter((menuItem)=>{
+          if(menuItem.category ===category){
+            return menuItem;
+          }
+      })
+      if(category === "all"){
+        displayMenuItems(menu);
+      }else{
+        displayMenuItems(menuCategory)
+      }
+    })
   })
-])
+})
+
 
 
 

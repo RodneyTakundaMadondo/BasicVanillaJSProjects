@@ -4,44 +4,27 @@
 //offsetTop - A Number, representing the top position of the element, in pixels
 
 // ********** set date ************
-const date = document.getElementById("date");
-date.textContent = new Date().getFullYear();
+let date = document.getElementById("date");
+date.innerHTML = new Date().getFullYear();
+
 // ********** close links ************
-const navToggle = document.querySelector(".nav-toggle")
-const linksContainer = document.querySelector(".links-container");
-const links = document.querySelector(".links");
+let navToggle = document.querySelector(".nav-toggle");
+let linksContainer = document.querySelector(".links-container");
+let links  = document.querySelector(".links");
 
 navToggle.addEventListener("click",()=>{
-    const containerHeight = linksContainer.getBoundingClientRect().height;
-    const linksHeight = links.getBoundingClientRect().height;
-    console.log(containerHeight);
-    if(containerHeight===0){
-        linksContainer.style.height = `${linksHeight}px`
+    let containerHeight = linksContainer.getBoundingClientRect().height;
+    let linksHeight = links.getBoundingClientRect().height;
+    if(containerHeight === 0 ){
+        linksContainer.style.height =`${linksHeight}px`
     }else{
         linksContainer.style.height = 0;
     }
-});
-
-
+})
+//
 /////
-let topLink = document.querySelector(".top-link");
+
 // ********** fixed navbar ************
-    let navBar = document.getElementById("nav");
-   
-    window.addEventListener("scroll", ()=>{
-        let scrollHeight = window.scrollY;
-        let navBarHeight = navBar.getBoundingClientRect().height;
-        if(scrollHeight>navBarHeight){
-            navBar.classList.add("fixed-nav")
-        }else{
-            navBar.classList.remove("fixed-nav")
-        }
-        console.log(scrollHeight)
-        if(scrollHeight>500){
-            topLink.classList.add("show-link")
-        }else{
-            topLink.classList.remove("show-link")
-        }
-    })
+    
 // ********** smooth scroll ************
 // select links
