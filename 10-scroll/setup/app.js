@@ -1,30 +1,61 @@
-// Element.getBoundingClientRect() method returns the size of an element and its position relative to the viewport.
-// pageYOffset is a read - only window property that returns the number of pixels the document has been scrolled vertically.
-// slice extracts a section of a string without modifying original string
-//offsetTop - A Number, representing the top position of the element, in pixels
+$(function(){
+    //fixed date
+    let dateContainer = document.querySelector("#date")
+let date  = new Date().getFullYear()
+dateContainer.innerHTML = date;
 
-// ********** set date ************
-let date = document.getElementById("date");
-date.innerHTML = new Date().getFullYear();
-
-// ********** close links ************
+//fixed nav toggle
 let navToggle = document.querySelector(".nav-toggle");
 let linksContainer = document.querySelector(".links-container");
-let links  = document.querySelector(".links");
+let links = document.querySelector(".links");
+$(navToggle).click(()=>{
+  let containerHeight = linksContainer.getBoundingClientRect().height;
+  let linksHeight = links.getBoundingClientRect().height;
+  if(containerHeight < linksHeight){
+    linksContainer.style.height = `${linksHeight}px`
+  }else{
+    linksContainer.style.height = 0;
+  }
+})
 
-navToggle.addEventListener("click",()=>{
-    let containerHeight = linksContainer.getBoundingClientRect().height;
-    let linksHeight = links.getBoundingClientRect().height;
-    if(containerHeight === 0 ){
-        linksContainer.style.height =`${linksHeight}px`
+//navbar that is position fixed
+let navbar = document.querySelector("#nav");
+let topLink = document.querySelector(".top-link")
+$(window).on("scroll",()=>{
+    let scrollHeight = window.scrollY;
+    let navbarHeight = navbar.getBoundingClientRect().height;
+    if(scrollHeight > navbarHeight){
+        navbar.classList.add("fixed-nav")
     }else{
-        linksContainer.style.height = 0;
+        navbar.classList.remove("fixed-nav");
+    }
+
+    if(scrollHeight>500){
+       $(topLink).addClass("show-link")
+    }else{
+        $(topLink).removeClass("show-link")
     }
 })
-//
-/////
 
-// ********** fixed navbar ************
-    
-// ********** smooth scroll ************
-// select links
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+})
